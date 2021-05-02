@@ -13,21 +13,21 @@ func Test_parse(t *testing.T) {
 		input string
 		want  string
 	}{
-		// {
-		// 	name:  "ok",
-		// 	input: "select id, name from users",
-		// 	want:  "select `id`, `name` from `users`",
-		// },
-		// {
-		// 	name:  "ok",
-		// 	input: "select id, name from users as u join articles as a on u.id = a.user_id",
-		// 	want:  "select `id`, `name` from `users` as `u` join `articles` as `a` on `u`.`id` = `a`.`user_id`",
-		// },
-		// {
-		// 	name:  "ok",
-		// 	input: " select id, name from users ",
-		// 	want:  " select `id`, `name` from `users` ",
-		// },
+		{
+			name:  "ok",
+			input: "select id, name from users",
+			want:  "select `id`, `name` from `users`",
+		},
+		{
+			name:  "ok",
+			input: "select id, name from users as u join articles as a on u.id = a.user_id",
+			want:  "select `id`, `name` from `users` as `u` join `articles` as `a` on `u`.`id` = `a`.`user_id`",
+		},
+		{
+			name:  "ok",
+			input: " select id, name from users ",
+			want:  " select `id`, `name` from `users` ",
+		},
 		{
 			name:  "ok",
 			input: "SELECT id, name FROM users ",
