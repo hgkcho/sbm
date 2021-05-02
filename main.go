@@ -16,6 +16,8 @@ var ignoreWords = []string{
 	"as",
 	"=",
 	" ",
+	"?",
+	"+",
 }
 
 func main() {
@@ -55,8 +57,12 @@ func surround(input string) string {
 
 func prs(input string) string {
 	var ret string
-	sp := strings.Split(input, " ")
+	// sp := strings.Split(input, " ")
+	sp := strings.Fields(input)
 	for i, v := range sp {
+		if v == "" {
+			continue
+		}
 		var buf string
 		buf = surround(v)
 
