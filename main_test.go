@@ -25,11 +25,6 @@ func Test_parse(t *testing.T) {
 		},
 		{
 			name:  "ok",
-			input: " select id, name from users ",
-			want:  " select `id`, `name` from `users` ",
-		},
-		{
-			name:  "ok",
 			input: "SELECT id, name FROM users ",
 			want:  "SELECT `id`, `name` FROM `users`",
 		},
