@@ -23,18 +23,12 @@ var ignoreWords = []string{
 
 func main() {
 	sc := bufio.NewScanner(os.Stdin)
-	sc.Scan()
-	t := sc.Text()
 
-	// var q = "select u.name from users as u join post as p on u.id = p.user_id" +
-	// 	"where user_id = ?"
-
-	// const t = `
-	// var query = "select u.name from users as u" +
-	// 	" join post as p join p.user_id = u.id "
-	// `
-
-	ret := prs(t)
+	var ret string
+	for sc.Scan() {
+		t := sc.Text()
+		ret += fmt.Sprintln(prs(t))
+	}
 
 	fmt.Fprintln(os.Stdout, ret)
 }
