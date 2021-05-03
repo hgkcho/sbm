@@ -17,7 +17,6 @@ var ignoreWords = []string{
 	"=",
 	" ",
 	"?",
-	"+",
 }
 
 func main() {

@@ -30,7 +30,17 @@ func Test_parse(t *testing.T) {
 		},
 		{
 			name:  "ok",
+			input: "SELECT id, name FROM users AS u JOIN articles AS a ON u.id = a.user_id",
+			want:  "SELECT `id`, `name` FROM `users` AS `u` JOIN `articles` AS `a` ON `u`.`id` = `a`.`user_id`",
+		},
+		{
+			name:  "ok",
 			input: "  select id, name from users ",
+			want:  "select `id`, `name` from `users`",
+		},
+		{
+			name:  "ok",
+			input: "\tselect id, name from users ",
 			want:  "select `id`, `name` from `users`",
 		},
 	}
