@@ -1,4 +1,5 @@
 BIN := sbm
+VERSION := $$(make -s show-version)
 VERSION_PATH := .
 GOBIN ?= $(shell go env GOPATH)/bin
 BUILD_LDFLAGS := "-s -w -X main.revision=$(CURRENT_REVISION)"
