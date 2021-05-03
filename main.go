@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"go/scanner"
 	"go/token"
@@ -21,17 +22,17 @@ var ignoreWords = []string{
 }
 
 func main() {
-	// sc := bufio.NewScanner(os.Stdin)
-	// sc.Scan()
-	// t := sc.Text()
+	sc := bufio.NewScanner(os.Stdin)
+	sc.Scan()
+	t := sc.Text()
 
 	// var q = "select u.name from users as u join post as p on u.id = p.user_id" +
 	// 	"where user_id = ?"
 
-	const t = `
-	var query = "select u.name from users as u" +
-		" join post as p join p.user_id = u.id "
-	`
+	// const t = `
+	// var query = "select u.name from users as u" +
+	// 	" join post as p join p.user_id = u.id "
+	// `
 
 	ret := prs(t)
 
