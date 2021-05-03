@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var version = "0.0.1"
+
 var ignoreWords = []string{
 	"select",
 	"from",
