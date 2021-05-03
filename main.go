@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"go/scanner"
 	"go/token"
@@ -9,7 +10,11 @@ import (
 	"strings"
 )
 
-var version = "0.0.1"
+var (
+	version = "0.0.1"
+	commit  = "none"
+	date    = "unknown"
+)
 
 var ignoreWords = []string{
 	"select",
@@ -24,6 +29,15 @@ var ignoreWords = []string{
 }
 
 func main() {
+	var v bool
+	flag.BoolVar(&v, "v", false, "show version")
+	flag.Parse()
+
+	if v {
+		fmt.Println("version: ", version)
+		os.Exit(0)
+	}
+
 	sc := bufio.NewScanner(os.Stdin)
 
 	var ret string

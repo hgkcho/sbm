@@ -1,6 +1,7 @@
 BIN := sbm
 VERSION_PATH := .
 GOBIN ?= $(shell go env GOPATH)/bin
+BUILD_LDFLAGS := "-s -w -X main.revision=$(CURRENT_REVISION)"
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -10,7 +11,7 @@ help: ## この文章を表示します。
 
 .PHONY: build
 build: ## build
-	@go build .
+	@go build -ldflags=$(BUILD_LDFLAGS) .
 
 .PHONY: clean
 clean: ## clean up bin
