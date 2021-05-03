@@ -6,7 +6,6 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-var query = "SELECT `id`, `name` FROM `users` AS `u` JOIN `articles` AS `a` ON `u`.`id` = `a`.`user_id`"
 
 func Test_prsString(t *testing.T) {
 	t.Parallel()
