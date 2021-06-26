@@ -18,6 +18,10 @@ build: ## build
 clean: ## clean up bin
 	@rm -f $(BIN)
 
+.PHONY: install
+install: ## install dependent binary
+	@go install github.com/x-motemen/gobump/cmd/gobump@latest
+
 .PHONY: show-version
 show-version: $(GOBIN)/gobump ## show version
 	@gobump show -r $(VERSION_PATH)
