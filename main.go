@@ -63,7 +63,8 @@ LOOP:
 		case token.EOF:
 			break LOOP
 		case token.SEMICOLON:
-			continue
+			break LOOP
+			// continue
 		case token.ASSIGN:
 			ret = ret + " " + token.ASSIGN.String()
 		case token.DEFINE:
@@ -71,7 +72,7 @@ LOOP:
 		case token.ADD:
 			ret = ret + " " + token.ADD.String()
 		case token.STRING:
-			// remove double quotation from lit
+			// lit is string that is removed double quotation from original lit
 			lit = lit[1 : len(lit)-1]
 			s := prsString(lit)
 			lit = "\"" + s + "\""
@@ -83,6 +84,7 @@ LOOP:
 	return ret
 }
 
+// surround enclose input string with backquotes if it is not already enclosed
 func surround(input string) string {
 	var ret string
 	// if input word is ingore word, just return input
@@ -99,23 +101,36 @@ func surround(input string) string {
 	}
 
 	sp2 := strings.Split(input, ".")
-	for i2, v2 := range sp2 {
-		if i2 == 0 {
-			ret += "`" + v2 + "`"
+	for i, v := range sp2 {
+		if i == 0 {
+			ret += surroundWithBackQuote(v)
 		} else {
-			ret += ".`" + v2 + "`"
+			ret += "." + surroundWithBackQuote(v)
 		}
 	}
 	return ret + commaBuf
 }
 
+func surroundWithBackQuote(input string) string {
+	var ret string
+	if !strings.HasPrefix(input, "`") {
+		ret += "`"
+	}
+	ret += input
+	if !strings.HasSuffix(input, "`") {
+		ret += "`"
+	}
+	return ret
+}
+
+// prsString parse input string into escaped SQL
 func prsString(input string) string {
 	var ret string
 	var hasSpace bool
 	if strings.HasPrefix(input, " ") {
 		hasSpace = true
 	}
-	// sp := strings.Split(input, " ")
+	// sp substring of input divided by white space
 	sp := strings.Fields(input)
 	for i, v := range sp {
 		if v == "" {

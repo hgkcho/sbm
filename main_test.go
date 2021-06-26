@@ -6,7 +6,6 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-
 func Test_prsString(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
@@ -44,6 +43,11 @@ func Test_prsString(t *testing.T) {
 			input: "\tselect id, name from users ",
 			want:  "select `id`, `name` from `users`",
 		},
+		{
+			name:  "ok_7",
+			input: "SELECT `id`, `name` FROM `users`",
+			want:  "SELECT `id`, `name` FROM `users`",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -63,12 +67,12 @@ func Test_prs(t *testing.T) {
 		want  string
 	}{
 		{
-			name:  "ok",
+			name:  "ok_1",
 			input: `var q = "select u.id, u.name from user as u"`,
 			want:  " var q = \"select `u`.`id`, `u`.`name` from `user` as `u`\"",
 		},
 		{
-			name: "ok",
+			name: "ok_2",
 			input: `var q = "select u.id, u.name from user as u" +
 			" join post as p on u.id = p.user_id where u.id = ?"
 			`,
@@ -80,7 +84,7 @@ func Test_prs(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got := prs(tt.input)
 			if diff := cmp.Diff(tt.want, got); diff != "" {
-				t.Errorf("mismatch (-want +got) %v\n", diff)
+				t.Errorf("mismatch (-want +got) %s\n", diff)
 			}
 		})
 	}
